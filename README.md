@@ -63,3 +63,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # laravel-training
 Laravel training
+
+
+### How to start: 
+
+1 - `Install package: $composer install` (or COMPOSER_MEMORY_LIMIT=-1 composer install`
+
+2 - `Start all service: $docker-compose up -d`
+
+3 -  Create Database name 'laravel_training' (use "docker-compose exec db mysql -u root -p" or use software to connect or access link phpmyadmin: http://localhost:8086/)
+- `Run Migration : $docker-compose exec app php artisan migrate --seed  `
+
+
+4 -  Access website at link: http://localhost:8085/
