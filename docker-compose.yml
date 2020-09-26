@@ -1,0 +1,62 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./docker/
+      dockerfile:  app.dockerfile
+    container_name: lr-app
+    volumes:
+      - ./:/app:delegated
+    environment:
+      APP_ENV: app
+      CONTAINER_ROLE: app
+  scheduler:
+    build:
+      context: ./docker/
+      dockerfile:  app.dockerfile
+    container_name: lr-app-scheduler
+    volumes:
+      - ./:/app:delegated
+    environment:
+      APP_ENV: app
+      CONTAINER_ROLE: scheduler
+  queue:
+    build:
+      context: ./docker/
+      dockerfile:  app.dockerfile
+    container_name: lr-app-queue
+    volumes:
+      - ./:/app:delegated
+    environment:
+      APP_ENV: app
+      CONTAINER_ROLE: queue
+  web:
+    build:
+      context: ./docker/
+      dockerfile:  web.dockerfile
+    container_name: lr-web
+    volumes:
+      - ./public:/app/public:delegated
+      - ./storage/app/public/uploads:/app/public/uploads:delegated
+    ports:
+      - "8085:80"
+  db:
+    image: mysql:8.0
+    container_name: lr-db
+    volumes:
+      - ./data/mysql:/var/lib/mysql:delegated
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 33061:3306
+  redis:
+    container_name: lr-redis
+    image: redis:4-alpine
+    ports:
+      - 26379:6379
+    volumes:
+      - ./data/redis:/data
+#
+#volumes:
+#  redis:
+#    driver: "local"
