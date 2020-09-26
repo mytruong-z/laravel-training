@@ -47,9 +47,6 @@ services:
       - ./data/mysql:/var/lib/mysql:delegated
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=laravel_training
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
     ports:
       - 33061:3306
   redis:
