@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    min-width: 250px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.listAll, #myDIV {
+    margin: 0 auto;
+}
+
+.listCustom {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+.listCustom div.ist-group-item {
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 16px;
+    transition: 0.2s;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.listCustom div.ist-group-item:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.listCustom div.ist-group-item:hover {
+    background: #ddd;
+}
+
+.listCustom div.ist-group-item.checked {
+    background: #888;
+    color: #fff;
+    border-bottom: 1px solid;
+}
+
+.boxIcon {
+    margin-left: 20px;
+}
+
+.listCustom div.ist-group-item.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 20px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.icon-check, .icon-remove {
+    text-align: center;
+    cursor: pointer;
+    width: 40px;
+    padding: 5px 10px;
+}
+.icon-check {
+    background-color: #45ec5a;
+}
+.icon-remove {
+    background-color: #bbb;
+}
+.btn-custom {
+    border-radius: initial;
+    font-weight: bold;
+    cursor: pointer;
+    flex-basis: 18%;
+    margin-bottom: 10px;
+    padding: 10px 5px;
+}
+.btnBack {
+    border-radius: initial;
+    margin: 50px auto;
+    width: 50%;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.box-middle-50 {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    width: 50%;
+    margin: 1% auto;
+}
+.btn-custom:hover {
+    background-color: #282c34;
+    border-color: #282c34;
+    color: #ffffff;
+}

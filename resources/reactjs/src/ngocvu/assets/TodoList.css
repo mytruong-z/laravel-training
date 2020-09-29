@@ -1,0 +1,145 @@
+.makeStyles-content-37 {
+    overflow: auto;
+}
+.Todolist {
+    text-align: left;
+    padding: 25px 50px;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'Roboto', sans-serif;
+	background: #3ec9e9;
+	background: -webkit-linear-gradient(to right, #2940a4, #3ec9e9);
+    background: linear-gradient(to right, #2940a4, #3ec9e9);
+    font-family: 'Roboto', sans-serif;
+    background: #3ec9e9;
+    background: -webkit-linear-gradient(to right, #2940a4, #3ec9e9);
+    background: linear-gradient(to right, #2940a4, #3ec9e9);
+}
+.Todolist .List-todo {
+    padding-left: 0;
+    margin-top: 0;
+}
+.Todolist .group-add-task {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+.Todolist .group-add-task input {
+    flex-grow: 1;
+    height: 40px;
+    padding: 10px;
+    border-color: transparent;
+    border-radius: 4px;
+}
+.Todolist .group-add-task input:focus,
+.Todolist .group-add-task .btn:focus {
+    outline-style: none;
+}
+.Todolist .group-add-task .btn {
+    background: #3ec9e9;
+    color: #fff;
+    border-color: #3ec9e9;
+    height: 40px;
+    border-color: transparent;
+    width: 60px;
+    border-radius: 4px;
+}
+.Todolist .table-striped {
+    color: #fff;
+}
+.Todolist .table-striped .table-header {
+    color: #3ec9e9;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    border-bottom: 2px solid #fff;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 0;
+    padding: 15px;
+}
+.Todolist .table-striped .table-body li:hover,
+.Todolist .table-striped .table-body li.done:hover span,
+.Todolist .table-striped .table-body li:nth-of-type(odd):hover,
+.Todolist .table-striped .table-body li:nth-of-type(even):hover {
+	background: #3ec9e9;
+    color: black;
+    border-color: #3ec9e9;
+}
+
+.Todolist .table-striped .table-body .Task:hover .btn {
+    color: black;
+}
+.Todolist .table-striped .table-body .Task .btn:hover {
+    color: red !important;
+}
+
+.Todolist .table-striped .table-body li {
+	margin-top: 20px;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid rgb(206, 216, 228, 0.2);
+    text-transform: capitalize;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+	margin: 0;
+    color: #ced8e4;
+}
+.Todolist .table-striped .table-body li:last-child {
+    border-bottom: none;
+}
+.Todolist .table-striped .table-body li:last-child:hover {
+    border-radius: 0 0 20px 20px;
+}
+.Todolist .table-striped .table-body li td .btn {
+	color: #3ec9e9 !important;
+    background: transparent;
+    border: none;
+    font-weight: bold;
+}
+  
+.Todolist .container {
+    color: #ced8e4;
+    background: #1e1f2e;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(43, 45, 66, 0.5);
+    padding: 0;
+}
+  
+.Todolist .container h2 {
+    padding: 20px 0 10px 20px;
+    font-weight: 600;
+    color: #3ec9e9;
+    text-align: center;
+    text-transform: uppercase;
+}
+.Todolist .table .table-body li.Task span {
+	flex-grow: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.Todolist .table .table-body li.removed {
+    display: none;
+}
+.Todolist .table .table-body li.done span {
+    text-decoration: line-through;
+    color: rgb(206, 216, 228, 0.2);
+}
+.Todolist .table .btn {
+    border: none;
+    color: #3ec9e9;
+    padding: 0;
+    font-weight: bold;
+    font-size: 16px;
+    background: transparent;
+}

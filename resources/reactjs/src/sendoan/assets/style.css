@@ -1,0 +1,143 @@
+.App {
+    width: 70%;
+    margin: 5% 100px 5% 300px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.section {
+    padding: 10% 0;
+}
+
+.header {
+    background-color: #a77864;
+    color: #ffffff;
+    padding: 20px 40px;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    width: 80%;
+}
+.input-group input:focus {
+    box-shadow: unset;
+}
+
+.input-group #title-input {
+    font-size: 100%;
+    flex-grow: 2;
+    height: 44px;
+    border-color: #6493a7;
+}
+
+#add-title {
+    font-size: 100%;
+    height: 42px;
+    padding-right: 50px;
+    padding-left: 50px;
+    cursor: pointer;
+    background-color: #6493a7;
+    border-color: #6493a7;
+    color: #ffffff;
+}
+
+.List-todo {
+    list-style-type: none;
+}
+
+.content .col-md-8 {
+    padding: 0;
+}
+
+.Todo-row.odd:hover,
+.Todo-row.even:hover {
+    background-color: #d0dee4;
+    cursor: pointer;
+}
+#title-input,
+.form-control.select-user-id {
+    padding: .25rem .5rem;
+}
+.Todo-clear {
+    color: #000000;
+    padding: 10px;
+}
+
+.Todo-clear:hover {
+    background-color: red;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.Todo-row .title-text {
+    flex-grow: 1;
+}
+
+.done-icon {
+    padding: 10px;
+    color: #e4d6d0;
+}
+
+.Todo-row.even .done-icon {
+    color: #f6f1ef;
+}
+
+.Todo-row.odd:hover .done-icon ,
+.Todo-row.even:hover .done-icon {
+    color: #d0dee4;
+}
+
+.Todo-row.done:hover .done-icon,
+.Todo-row.done .done-icon {
+    color: #ffffff;;
+}
+
+.Todo-row.odd.done .title-text,
+.Todo-row.even.done .title-text {
+    text-decoration: line-through;
+}
+
+.Todo-row.odd.done,
+.Todo-row.even.done {
+    background-color: #6493a7;
+    color: #ffffff;
+    padding: 0;
+}
+
+.Todo-row.even {
+    background-color: #f6f1ef;
+}
+
+.Todo-row.odd {
+    background-color: #e4d6d0;
+}
+
+.Todo-row > span {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.Todo-text {
+    flex-grow: 2;
+}
+
+.Todo-row {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.List-todo {
+    padding: 0;
+    margin: 0;
+}
+.Heading {
+    display: inline-flex;
+    font-size: 24px;
+}
+.form-control-sm {
+    margin: 0 10px;
+}
