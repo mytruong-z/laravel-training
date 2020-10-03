@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('mytruong-get-todo-list/{userId}', 'mytruong\TodoController@showByUser');
+Route::get('mytruong-get-user-list', 'mytruong\UserController@showAllUser');
+Route::post('mytruong-add-todo', 'mytruong\TodoController@create');

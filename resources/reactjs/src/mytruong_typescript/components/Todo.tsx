@@ -39,12 +39,27 @@ const useStyles = makeStyles({
 });
 
 const TodoList: React.FC<TodoType> = (props) => {
-	const {userId, userList, loaded, setUserId, fetchToDo} = props
+	const {userId, userList, loaded, setUserId, fetchToDo, fetchUser} = props;
 	const classes = useStyles();
 
 	useEffect(() => {
-		fetchToDo();
-	}, [fetchToDo]);
+        fetchUser();
+	}, []);
+
+	const handleChangeUserId = (id: number) => {
+        setUserId(id);
+        fetchToDo(id);
+	};
+
+    const getUserName = () => {
+        let name = 'User';
+        userList.map((item: any, index: number) => {
+            if (item.id === userId) {
+                name = item.name;
+            }
+        });
+        return name;
+    };
 
 	return (
 		<React.Fragment>
@@ -56,7 +71,7 @@ const TodoList: React.FC<TodoType> = (props) => {
 								?
 								<Box>
 									<Typography className={classes.typographyStyle} variant="h5" component="h1">
-										To Do List - User {userId}
+										To Do List - {getUserName()}
 									</Typography>
 									<Box className="container">
 										<Box className={classes.boxAdd}>
@@ -88,16 +103,16 @@ const TodoList: React.FC<TodoType> = (props) => {
 										className={classes.marginTop20}
 									>
 										{
-											userList.map((data: number, index: number) => {
+											userList.map((data: any, index: number) => {
 												return (
-													<Grid container item sm={3}>
+													<Grid key={index} container item sm={3}>
 														<Button
 															className={classes.buttonUser}
 															variant="contained"
 															color="secondary"
-															key={data}
-															onClick={() => setUserId(data)}>
-															User {data}
+															key={data.id}
+															onClick={() => handleChangeUserId(data.id)}>
+															{data.name}
 														</Button>
 													</Grid>
 												);
@@ -112,7 +127,7 @@ const TodoList: React.FC<TodoType> = (props) => {
 			</Box>
 		</React.Fragment>
 	)
-}
+};
 
 const mapStateToProps = (state: typeForMapTodo) => {
 	return {
@@ -125,8 +140,9 @@ const mapStateToProps = (state: typeForMapTodo) => {
 
 //action
 const mapDispatchToProps = (dispatch : Function) => ({
-	fetchToDo: () =>  dispatch(actionTypes.fetchTodo()),
+	fetchToDo: (data: number) =>  dispatch(actionTypes.fetchTodo(data)),
 	setUserId: (data: number) => dispatch(actionTypes.setUserId(data)),
+	fetchUser: () =>  dispatch(actionTypes.fetchUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

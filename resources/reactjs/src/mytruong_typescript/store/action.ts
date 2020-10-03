@@ -34,9 +34,10 @@ export const handleCompletedItem = (data: ItemTodo) => ({
 	payload: { data }
 });
 
-export const fetchTodo = () => {
+export const fetchTodo = (id: number) => {
 	return (dispatch: Function) => {
-		return fetch("https://jsonplaceholder.typicode.com/todos")
+		const url = 'http://localhost:8085/api/mytruong-get-todo-list/' + id;
+		return fetch(url)
 			.then(response => response.json())
 			.then(data => {
 				dispatch({
@@ -45,4 +46,16 @@ export const fetchTodo = () => {
 				});
 			})
 	}
+};
+export const fetchUser = () => {
+    return (dispatch: Function) => {
+        return fetch("http://localhost:8085/api/mytruong-get-user-list")
+            .then(response => response.json())
+            .then(data => {
+                dispatch({
+                    type: SET_USER_LIST,
+                    payload: { data: [...data] },
+                });
+            })
+    }
 };

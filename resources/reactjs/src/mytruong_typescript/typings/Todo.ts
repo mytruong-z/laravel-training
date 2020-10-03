@@ -12,7 +12,8 @@ export interface TodoType {
 	userList: number[];
 	loaded: boolean;
 	setUserId: (id: number) => void,
-	fetchToDo: () => void,
+	fetchToDo: (id: number) => void,
+    fetchUser: () => void
 }
 
 export interface ItemTodo {

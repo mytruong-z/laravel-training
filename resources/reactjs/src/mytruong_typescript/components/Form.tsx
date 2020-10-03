@@ -61,7 +61,7 @@ const Form: React.FC<FormState> = (props) => {
 				className={classes.buttonSave}>Save</Button>
 		</form>
 	)
-}
+};
 
 const mapStateToProps = (state: typeForMapForm) => {
 	return {

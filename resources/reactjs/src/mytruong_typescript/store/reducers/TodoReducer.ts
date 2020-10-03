@@ -1,5 +1,6 @@
 import * as actionTypes from '../action';
 import { reducersState, Actions } from  '../types';
+import {SET_ALL_LIST} from "../action";
 
 const initialState = {
 	allList: [],
@@ -13,22 +14,20 @@ const initialState = {
 const getUserList = (data: any[]) => {
 	let arrUserId: any[] = [];
 	data.map((item, index) => {
-		arrUserId.push(item.userId);
-		return arrUserId;
+		arrUserId.push(item);
 	});
-	return arrUserId.filter((value, index, arr) => arr.indexOf(value) === index);
+    return arrUserId;
+	//return arrUserId.filter((value, index, arr) => arr.indexOf(value) === index);
 };
 
 export default function reducers(state: reducersState = initialState, action: Actions) {
 	switch (action.type) {
-		case actionTypes.SET_ALL_LIST:
-			return {
-				...state,
-				allList: action.payload.data,
-				totalItem: action.payload.data.reduce((prev: { y: number; id: any; }, current: { y: number; id: any; }) => (prev.y > current.y) ? prev.id : current.id),
-				userList: getUserList(action.payload.data),
-				loaded: true
-			};
+        case actionTypes.SET_ALL_LIST:
+            return {
+                ...state,
+                allList: action.payload.data,
+                totalItem: action.payload.data.length ? action.payload.data.reduce((prev: { y: number; id: any; }, current: { y: number; id: any; }) => (prev.y > current.y) ? prev.id : current.id) : 0,
+            };
 		case actionTypes.SET_TOTAL_ITEM:
 			return {
 				...state,
@@ -42,7 +41,8 @@ export default function reducers(state: reducersState = initialState, action: Ac
 		case actionTypes.SET_USER_LIST:
 			return {
 				...state,
-				userList: getUserList(action.payload.data)
+				userList: getUserList(action.payload.data),
+                loaded: true
 			};
 		case actionTypes.SET_LOADED:
 			return {
@@ -55,6 +55,16 @@ export default function reducers(state: reducersState = initialState, action: Ac
 				newValue: action.payload.data
 			};
 		case actionTypes.HANDLE_ADD_ITEM:
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+					title: action.payload.data.title,
+                    userId: action.payload.data.userId,
+                })
+            };
+            fetch('http://localhost:8085/api/mytruong-add-todo', requestOptions)
+                .then(response => console.log(response));
 			return {
 				...state,
 				allList: [...state.allList, action.payload.data],
