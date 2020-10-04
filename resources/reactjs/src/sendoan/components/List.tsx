@@ -1,16 +1,13 @@
 import React from "react";
 import Row from "./Row";
-import { ListUtils } from "./Todo";
 import { connect } from "react-redux";
-import { TodoState, Todo, StoreState } from "../store/reducers/TodoReducers";
+import { TodoState, StoreState } from "../store/reducers/TodoReducers";
 import {
 	Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import root from "./styles";
 
 export interface ListState {
-	todoList: (list: Todo[], userId: number) => Todo[],
 	attr: TodoState
 }
 
@@ -27,22 +24,18 @@ const styles = makeStyles({
 
 const List: React.FC<ListState> = (props) => {
 	const classes = styles();
-	const { attr, todoList } = props;
-
-	const list = () => {
-		return todoList(attr.list, attr.currentUser);
-	};
+	const { attr } = props;
 
 	return (
-		<Grid container justify="center" sm={12} className={classes.listBox}>
+		<Grid container justify="center" className={classes.listBox}>
 			{
 				(attr.isLoaded)
 					? (
-						(list().length > 0)
+						(typeof attr.list != 'undefined')
 							?
 							<ul className={classes.listTodo}>
 								{
-									list().map(todo => {
+									attr.list.map(todo => {
 										return <Row key={todo.id} index={todo.id}
 													text={todo.title}
 													completed={todo.completed}/>;
@@ -67,10 +60,4 @@ const mapStateToProps = (state: StoreState) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch: Function) => {
-	return {
-		todoList: (list: Todo[], userId: number) => ListUtils.getTodoListByUserId(list, userId),
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps)(List);

@@ -33,15 +33,11 @@ export function fetchData(url: string) {
 	return (dispatch: Function) => {
 		return fetch(url).then(response => response.json())
 			.then(res => {
-				let list = new ListTodos(res);
-				let userIds = list.getUserIds();
+				let users = res.data;
 
 				dispatch ({
 					type: TodoTypes.fetchData,
-					list: list.list,
-					error: '',
-					userIds: userIds,
-					currentUser: userIds[0]
+					users: users,
 				});
 			}).catch(error => {
 
@@ -56,9 +52,24 @@ export function fetchData(url: string) {
 }
 
 export function selectUserId(userId: number) {
-	return {
-		type: TodoTypes.selectUser,
-		userId: userId,
+	return (dispatch: Function) => {
+		return fetch('http://localhost:8085/api/sendoan/user/' + userId + '/todos')
+			.then(response => response.json())
+			.then(res => {
+				let list = new ListTodos(res.data);
+
+				dispatch ({
+					list: list.list,
+					type: TodoTypes.selectUser,
+					userId: userId,
+				});
+			}).catch(error => {
+				dispatch ({
+					type: TodoTypes.selectUser,
+					userId: userId,
+					error: error,
+				});
+			});
 	}
 }
 

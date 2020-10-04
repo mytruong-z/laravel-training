@@ -1,5 +1,10 @@
 import { TodoTypes } from "../TodoActions";
 
+export interface User {
+	id: number,
+	name: string
+}
+
 export interface Todo {
 	userId: number;
 	id: number;
@@ -11,8 +16,8 @@ export interface TodoState {
 	list: Todo[],
 	isLoaded: boolean,
 	error: string,
-	userIds: number[],
-	currentUser: number,
+	users: User[],
+	currentUser: any,
 	inputValue: string
 }
 
@@ -24,20 +29,20 @@ export const initialState = {
 	list: [],
 	isLoaded: false,
 	error: "",
-	userIds: [],
-	currentUser: 0,
-	inputValue: ""
+	users: [],
+	currentUser: "",
+	inputValue: "",
 };
 
 export interface Actions {
 	type: string,
 	list?: [],
-	userIds?: number[],
+	users?: User[],
 	error?: "",
 	input?: "",
 	id?: number,
 	userId?: number,
-	currentUser?: number
+	currentUser?: any
 }
 
 const todos = (state: TodoState = initialState, action: Actions) => {
@@ -45,10 +50,8 @@ const todos = (state: TodoState = initialState, action: Actions) => {
 		case TodoTypes.fetchData:
 
 			return {
-				list: action.list,
-				userIds: action.userIds,
-				currentUser: action.currentUser,
-				isLoaded: true,
+                isLoaded: true,
+				users: action.users,
 				error: action.error,
 				inputValue: ""
 			};
@@ -90,7 +93,10 @@ const todos = (state: TodoState = initialState, action: Actions) => {
 
 			return {
 				...state,
-				currentUser: Number(action.userId)
+				currentUser: Number(action.userId),
+				error: action.error,
+				list: action.list,
+                isLoaded: true,
 			};
 
 		case TodoTypes.input:

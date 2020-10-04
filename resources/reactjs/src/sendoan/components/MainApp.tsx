@@ -3,7 +3,7 @@ import List from "./List";
 import Form from "./Form";
 import * as TodoActions from "../store/TodoActions";
 import { connect } from "react-redux";
-import { StoreState, TodoState } from "../store/reducers/TodoReducers";
+import {StoreState, TodoState, User} from "../store/reducers/TodoReducers";
 import {
 	NativeSelect,
 	FormControl,
@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import root from "./styles";
 
-const url = "http://jsonplaceholder.typicode.com/todos";
+const url = "http://localhost:8085/api/sendoan/users/";
 
 export interface AppState {
 	fetchData: () => void,
@@ -22,7 +22,7 @@ export interface AppState {
 
 const styles = makeStyles({
 	selectUser: {
-		width: 100,
+		width: 150,
 		color: root.mainColor,
 	},
 	formControl: {
@@ -74,18 +74,19 @@ const MainApp: React.FC<AppState> = (props) => {
 
 	return (
 		<Grid className={classes.app} container>
-			<Grid container sm={12}>
+			<Grid container>
 				<Grid container alignItems="center" justify="center" direction="column" className={classes.headingBox}>
 					<Grid container justify="center"
 						  alignItems="flex-end" direction="row"
-						  className={classes.heading}>User ID
+						  className={classes.heading}>User
 						<FormControl className={classes.formControl}>
-							<NativeSelect defaultValue={attr.userIds[0]}
+							<NativeSelect defaultValue={attr.users[0]}
 										  className={classes.selectUser}
-										  onClick={onSelectHandler}>
+										  onChange={onSelectHandler}>
+								<option key={-1} value={-1}>Select User</option>;
 								{
-									attr.userIds.map(userId => {
-										return <option key={userId} value={userId}>{userId}</option>;
+									attr.users.map((user: User) => {
+										return <option key={user.id} value={user.id}>{user.name}</option>;
 									})
 								}
 							</NativeSelect>

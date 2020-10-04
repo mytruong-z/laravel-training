@@ -21,6 +21,10 @@ export class ListTodos {
 
 export class ListUtils {
 	static getTodoListByUserId = (list: Todo[], userId: number) => {
+		if (typeof list == 'undefined') {
+			return [];
+		}
+
 		let todoList = list.filter( todo => todo.userId === Number(userId) );
 
 		return todoList.sort((a,b) => {

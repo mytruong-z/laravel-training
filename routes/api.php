@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\sendoan\ApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +24,8 @@ Route::post('mytruong-add-todo', 'mytruong\TodoController@create');
 
 Route::get('nhuphamusers', [\App\Http\Controllers\API\NhuPhamController::class, 'index']);
 Route::post('nhuphamusers/create', [\App\Http\Controllers\API\NhuPhamController::class, 'store']);
+
+Route::group(['prefix' => 'sendoan'], function () {
+    Route::get('users', [ApiController::class, 'userList'])->name('user.list');
+    Route::get('user/{userId}/todos', [ApiController::class, 'todoList'])->name('user.todos');
+});
