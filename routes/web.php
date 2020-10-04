@@ -17,6 +17,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('nhuphamusers', [\App\Http\Controllers\API\NhuPhamController::class, 'index']);
-Route::post('nhuphamusers/create', [\App\Http\Controllers\API\NhuPhamController::class, 'store']);
