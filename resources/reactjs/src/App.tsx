@@ -1,5 +1,5 @@
 // prettier-ignore
-import { AppBar, Badge, Divider, Drawer as DrawerMui, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
+import { AppBar, Badge, Divider, Drawer as DrawerMui, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
@@ -13,7 +13,7 @@ import { Route, Router } from "react-router-dom";
 import { history } from "./configureStore";
 import { Todo } from "./model";
 import { HomePage, TodoPage } from "./pages";
-import { RootState } from "./reducers/index";
+import { RootState } from "./reducers";
 import { withRoot } from "./withRoot";
 
 /// Bach
@@ -23,97 +23,41 @@ import NgocApp from "./ngocvu/index";
 import MyApp from "./mytruong_typescript/App";
 import ReactTodo from "./khoa/pages/khoa";
 import AppNhuPham from "./nhupham/App";
+import {CSRoute} from "./model/csroute";
 
-function Routes() {
+function Routes(props: { routes: CSRoute[] }) {
 	const classes = useStyles();
 
 	return (
 		<div className={classes.content}>
-			<Route exact={true} path="/" component={HomePage} />
-			<Route exact={true} path="/home" component={HomePage} />
-			<Route exact={true} path="/todo" component={TodoPage} />
-			<Route exact={true} path="/bach" component={Bach} />
-			<Route exact={true} path="/sen" component={Sen} />
-			<Route exact={true} path="/ngoc" component={NgocApp} />
-			<Route exact={true} path="/my" component={MyApp} />
-			<Route exact={true} path="/khoa" component={ReactTodo} />
-			<Route exact={true} path="/nhupham" component={AppNhuPham} />
+            {props.routes.map((route, index) => <Route key={index} exact={true} path={route.path} component={route.component} />)}
 		</div>
 	);
 }
 
-function Drawer(props: { todoList: Todo[] }) {
+function Drawer(props: { routes: CSRoute[], todoList: Todo[] }) {
 	const classes = useStyles();
 
 	return (
 		<div>
 			<div className={classes.drawerHeader} />
-			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/")}>
-					<ListItemIcon>
-						<HomeIcon />
-					</ListItemIcon>
-					<ListItemText primary="Home" />
-				</ListItem>
-			</List>
-			<Divider />
-			<List>
-				<ListItem button onClick={() => history.push("/todo")}>
-					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
-					</ListItemIcon>
-					<ListItemText primary="Todo" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/bach")}>
-					<ListItemIcon>
-						<HomeIcon />
-					</ListItemIcon>
-					<ListItemText primary="bach" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/sen")}>
-					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
-					</ListItemIcon>
-					<ListItemText primary="sen" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/ngoc")}>
-					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
-					</ListItemIcon>
-					<ListItemText primary="ngoc" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/my")}>
-					<ListItemIcon>
-						<TodoIcon todoList={props.todoList} />
-					</ListItemIcon>
-					<ListItemText primary="my" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/khoa")}>
-					<ListItemIcon>
-						<ListIcon />
-					</ListItemIcon>
-					<ListItemText primary="Khoa" />
-				</ListItem>
-			</List>
-			<List>
-				<ListItem button onClick={() => history.push("/nhupham")}>
-					<ListItemIcon>
-						<AndroidIcon />
-					</ListItemIcon>
-					<ListItemText primary="Nhu" />
-				</ListItem>
-			</List>
+            <Divider />
+
+            {props.routes.map((route, index) => {
+                return (
+                    <React.Fragment key={index}>
+                        <List>
+                            <ListItem button onClick={() => history.push(route.path)}>
+                                <ListItemIcon>
+                                    {route.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={route.name} />
+                            </ListItem>
+                        </List>
+                        {route.divider && <Divider />}
+                    </React.Fragment>
+                );
+            })}
 		</div>
 	);
 }
@@ -127,9 +71,18 @@ function App() {
 	// 	theme.breakpoints.down("sm")
 	// );
 
-	const handleDrawerToggle = () => {
-		setMobileOpen(!mobileOpen);
-	};
+	const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+
+    const routes: CSRoute[] = [
+        {path: '/', name: 'Home', icon: <HomeIcon />, component: HomePage, divider: true},
+        {path: '/todo', name: 'Todo', icon: <TodoIcon todoList={todoList} />, component: TodoPage},
+        {path: '/bach', name: 'Bach', icon: <HomeIcon />, component: Bach},
+        {path: '/sen', name: 'Sen', icon: <TodoIcon todoList={todoList} />, component: Sen},
+        {path: '/ngoc', name: 'Ngoc', icon: <TodoIcon todoList={todoList} />, component: NgocApp},
+        {path: '/my', name: 'My', icon: <TodoIcon todoList={todoList} />, component: MyApp},
+        {path: '/khoa', name: 'Khoa', icon: <ListIcon />, component: ReactTodo},
+        {path: '/nhupham', name: 'Nhu', icon: <AndroidIcon />, component: AppNhuPham},
+    ];
 
 	return (
 		<Router history={history}>
@@ -168,7 +121,7 @@ function App() {
 								keepMounted: true, // Better open performance on mobile.
 							}}
 						>
-							<Drawer todoList={todoList} />
+							<Drawer routes={routes} todoList={todoList} />
 						</DrawerMui>
 					</Hidden>
 					<Hidden smDown>
@@ -179,10 +132,10 @@ function App() {
 								paper: classes.drawerPaper,
 							}}
 						>
-							<Drawer todoList={todoList} />
+							<Drawer routes={routes} todoList={todoList} />
 						</DrawerMui>
 					</Hidden>
-					<Routes />
+					<Routes routes={routes} />
 				</div>
 			</div>
 		</Router>
@@ -190,7 +143,7 @@ function App() {
 }
 
 function TodoIcon(props: { todoList: Todo[] }) {
-	let uncompletedTodos = props.todoList.filter(t => t.completed === false);
+	let uncompletedTodos = props.todoList.filter(t => !t.completed);
 
 	if (uncompletedTodos.length > 0) {
 		return (
