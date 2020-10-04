@@ -44,7 +44,7 @@ const TodoList: React.FC<TodoType> = (props) => {
 
 	useEffect(() => {
         fetchUser();
-	}, []);
+	}, [fetchUser]);
 
 	const handleChangeUserId = (id: number) => {
         setUserId(id);

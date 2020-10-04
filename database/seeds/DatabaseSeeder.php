@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 50)->create();
         $this->call(SenDoanUsersSeeder::class);
         $this->call(SenDoanTodosSeeder::class);
+        $this->call(MyTruongUserSeeder::class);
+        $this->call(MyTruongTodoSeeder::class);
     }
 }
