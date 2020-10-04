@@ -1,19 +1,17 @@
 import React from 'react';
 import {Grid, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
-import AddTodoForm from './AddTodo';
-import TodoList from './TodoList';
 
-const TodoApp: React.FC = () => {
+
+const ManageUser: React.FC = () => {
     const classes = useStyles();
     return (
         <Grid container className={classes.root}>
             <Grid item xs={8}>
                 <Typography variant="h4" gutterBottom>
-                    User List
+                    Manage User
                 </Typography>
-                <AddTodoForm/>
-                <TodoList/>
+
             </Grid>
         </Grid>
     )
@@ -40,4 +38,4 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export default TodoApp
+export default ManageUser
