@@ -22,8 +22,8 @@ import Sen from "./sendoan/index";
 import NgocApp from "./ngocvu/index";
 import MyApp from "./mytruong_typescript/App";
 import ReactTodo from "./khoa/pages/khoa";
-import AppNhuPham from "./nhupham/App";
 import {CSRoute} from "./model/csroute";
+import AppNhuPhamApi from "./nhupham/app";
 
 function Routes(props: { routes: CSRoute[] }) {
 	const classes = useStyles();
@@ -81,7 +81,7 @@ function App() {
         {path: '/ngoc', name: 'Ngoc', icon: <TodoIcon todoList={todoList} />, component: NgocApp},
         {path: '/my', name: 'My', icon: <TodoIcon todoList={todoList} />, component: MyApp},
         {path: '/khoa', name: 'Khoa', icon: <ListIcon />, component: ReactTodo},
-        {path: '/nhupham', name: 'Nhu', icon: <AndroidIcon />, component: AppNhuPham},
+        {path: '/nhupham', name: 'Nhu', icon: <AndroidIcon />, component: AppNhuPhamApi},
     ];
 
 	return (
