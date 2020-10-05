@@ -15,7 +15,8 @@ class NhuPhamController extends Controller
      */
     public function index()
     {
-        return NhuPhamUser::all();
+        $users = NhuPhamUser::all();
+        return response()->json($users);
     }
 
     /**
