@@ -13,5 +13,4 @@ class User extends Model
         'id',
         'name'
     ];
-
 }

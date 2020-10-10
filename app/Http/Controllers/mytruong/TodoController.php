@@ -23,11 +23,16 @@ class TodoController
             'completed' => false
         ]);
         $todo->save();
+        return $todo;
     }
 
-    public function delete($id) {
-        $todo = Todo::find($id);
-        $todo->delete();
+    public function delete(Request $request) {
+        $id = $request->post('id');
+        if($id) {
+            $todo = Todo::find($id);
+            $todo->delete();
+        }
+        return $id;
     }
 
     public function showByUser($userId) {
@@ -37,4 +42,11 @@ class TodoController
         return $rs;
     }
 
+    public function complete(Request $request) {
+        $id = $request->post('id');
+        $todo = Todo::find($id);
+        $todo->completed = true;
+        $todo->save();
+        return $todo;
+    }
 }

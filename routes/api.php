@@ -19,9 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('mytruong-get-todo-list/{userId}', 'mytruong\TodoController@showByUser');
-Route::get('mytruong-get-user-list', 'mytruong\UserController@showAllUser');
-Route::post('mytruong-add-todo', 'mytruong\TodoController@create');
+Route::get('mytruong-get-todo-list/{userId}', [\App\Http\Controllers\mytruong\TodoController::class, 'showByUser']);
+Route::get('mytruong-get-user-list', [\App\Http\Controllers\mytruong\UserController::class, 'showAllUser']);
+Route::post('mytruong-add-todo', [\App\Http\Controllers\mytruong\TodoController::class, 'create']);
+Route::post('mytruong-complete-todo', [\App\Http\Controllers\mytruong\TodoController::class, 'complete']);
+Route::post('mytruong-delete-todo', [\App\Http\Controllers\mytruong\TodoController::class, 'delete']);
+
 
 Route::get('nhuphamusers', [\App\Http\Controllers\API\NhuPhamController::class, 'index']);
 Route::post('nhuphamusers/create', [\App\Http\Controllers\API\NhuPhamController::class, 'store']);

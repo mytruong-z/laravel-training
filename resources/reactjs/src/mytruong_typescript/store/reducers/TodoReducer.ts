@@ -1,6 +1,6 @@
 import * as actionTypes from '../action';
 import { reducersState, Actions } from  '../types';
-import {SET_ALL_LIST} from "../action";
+//import {SET_ALL_LIST} from "../action";
 
 const initialState = {
 	allList: [],
@@ -55,6 +55,7 @@ export default function reducers(state: reducersState = initialState, action: Ac
 				newValue: action.payload.data
 			};
 		case actionTypes.HANDLE_ADD_ITEM:
+		    let id = null;
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -63,20 +64,47 @@ export default function reducers(state: reducersState = initialState, action: Ac
                     userId: action.payload.data.userId,
                 })
             };
+            let obj = {
+                id: id,
+                userId: action.payload.data.userId,
+                completed: 0,
+                title: action.payload.data.title,
+            };
             fetch('http://localhost:8085/api/mytruong-add-todo', requestOptions)
-                .then(response => console.log(response));
-			return {
-				...state,
-				allList: [...state.allList, action.payload.data],
-				totalItem: state.totalItem + 1
-			};
+                .then(response => response.json())
+				.then(response => {
+                    obj.id = response.id;
+                });
+            return {
+                ...state,
+                allList: [...state.allList, obj],
+                totalItem: state.totalItem + 1
+            };
 		case actionTypes.HANDLE_REMOVE_ITEM:
+            const requestOptionsRemove = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: action.payload.data,
+                })
+            };
+            fetch('http://localhost:8085/api/mytruong-delete-todo', requestOptionsRemove)
+                .then(response => console.log("delete"));
 			return {
 				...state,
 				allList: state.allList.filter(item => item.id !== action.payload.data),
 				totalItem: state.totalItem - 1
 			};
 		case actionTypes.HANDLE_COMPLETED_ITEM:
+			const requestComplete = {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					id: action.payload.data.id,
+				})
+			};
+			fetch('http://localhost:8085/api/mytruong-complete-todo', requestComplete)
+				.then(response => console.log("complete"));
 			return {
 				...state,
 				allList: state.allList.map(todo => todo.id === action.payload.data.id ? { ...todo, completed: true } : todo),

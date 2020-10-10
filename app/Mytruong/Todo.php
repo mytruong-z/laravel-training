@@ -15,6 +15,8 @@ class Todo extends Model
         'title',
         'completed'
     ];
-
-
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 }
