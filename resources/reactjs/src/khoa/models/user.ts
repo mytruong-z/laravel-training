@@ -7,7 +7,7 @@ export interface User {
 
 export interface UserState {
     error: boolean,
-    results: Todo[]
+   // results: Todo[]
 }
 export interface UserPayload {
     error: boolean,

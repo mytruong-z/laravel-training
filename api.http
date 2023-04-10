@@ -1,0 +1,7 @@
+GET http://localhost:8085/api/mytruong-get-todo-list/1
+###
+GET http://localhost:8085/api/mytruong-get-user-list
+###
+GET http://localhost:8085/api/mytruonguser/index
+
+###
